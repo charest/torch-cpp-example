@@ -20,7 +20,7 @@ git clone git@github.com:charest/torch-cpp-example
 
 cd torch-cpp-example
 
-cmake -B build -GNinja . -DCMAKE_PREFIX_PATH=.venv\Lib\site-packages\_rocm_sdk_devel;.venv\Lib\site-packages\torch -DCMAKE_HIP_PLATFORM=amd -DCMAKE_HIP_ARCHITECTURES=gfx1101 -DCMAKE_CXX_COMPILER=hipcc.exe -DCMAKE_C_COMPILER=hipcc.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release
+cmake -B build -GNinja . -DCMAKE_PREFIX_PATH=.venv\Lib\site-packages\_rocm_sdk_devel;.venv\Lib\site-packages\torch -DCMAKE_HIP_PLATFORM=amd -DCMAKE_HIP_ARCHITECTURES=gfx1101 -DCMAKE_CXX_COMPILER=clang-cl.exe -DCMAKE_C_COMPILER=clang-cl.exe -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_CXX_FLAGS="--offload-arch=gfx1101"
 
 cmake --build build
 ```
@@ -30,10 +30,12 @@ build\torch_test.exe
 ```
 Expected output:
 ```
+GPU is available: Yes
 Creating tensor...
 Created data tensor
 ```
 Actual output:
 ```
+GPU is available: No
 Creating tensor...
 ```
